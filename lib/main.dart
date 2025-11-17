@@ -1,7 +1,7 @@
-import 'dart:ui_web';
+// import 'dart:ui_web';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+// import 'package:flutter/rendering.dart';
 
 // void main() {
 //   runApp(MaterialApp(home: Column(children: [
@@ -61,86 +61,233 @@ import 'package:flutter/rendering.dart';
 //   }
 // }
 
+// void main() {
+//   runApp(MaterialApp(
+//     home: Scaffold(
+//       appBar: AppBar(
+//         title: Text("Favorite Card"),
+//         backgroundColor: Colors.blue,
+//       ),
+//       body: Column(
+//         children: [
+//           BestCard(title: "burger", desc: "2 bread 1 meat in the middle"),
+//           BestCard(title: "sushi", desc: "meat wrapped in rice wrapped in sushi"),
+//           BestCard(title: "pizza", desc: "circular bread meat cheese slice"),
+//         ],
+//       ),
+//     )
+//   ));
+// }
+
+// class BestCard extends StatefulWidget {
+//   final String title;
+//   final String desc;
+
+//   const BestCard ({super.key, required this.title, required this.desc});
+
+//   @override  
+//   State<BestCard> createState() => _BestCardState();
+// }
+
+// class _BestCardState extends State<BestCard> {
+//   // Color iconColor = Colors.grey;
+//   Icon icon = Icon(Icons.favorite_border, color: Colors.grey,);
+//   bool iconState = false;
+
+//   void iconColorPress() {
+//     setState(() {
+//       if (!iconState) {
+//         icon = Icon(Icons.favorite, color: Colors.red,);
+//         iconState = true;
+//       } else {
+//         icon = Icon(Icons.favorite_border, color: Colors.grey,);
+//         iconState = false;
+//       }
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: EdgeInsets.all(10),
+//       // margin: EdgeInsets.all(10),
+//       height: 100,
+//       decoration: BoxDecoration(
+//         color: Colors.white,
+//         border: BorderDirectional(
+//           bottom: BorderSide(
+//             color: Colors.black,
+//             width: 1,
+//             style: BorderStyle.solid,
+//           ),
+//         ),
+//       ),
+//       child: Row(
+//         children: [
+//           Expanded(
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Text(widget.title, style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+//                 SizedBox(height: 10,),
+//                 Text(widget.desc, style: TextStyle(color: Colors.black)),
+//               ],
+//             ),
+//           ),
+//           IconButton(
+//             onPressed: iconColorPress,
+//             icon: icon,
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// List<String> images = [
+//   "assets/bird.jpg",
+//   "assets/bird2.jpg",
+//   "assets/insect.jpg",
+//   "assets/girl.jpg",
+//   "assets/man.jpg",
+// ];
+
+// void main() {
+//   runApp(MaterialApp(
+//     debugShowCheckedModeBanner: false,
+//     home: ImageWidget()
+//     ),
+//   );
+// }
+
+// class ImageWidget extends StatefulWidget {
+//   const ImageWidget ({super.key});
+
+//   @override  
+//   State<ImageWidget> createState() => _ImageWidgetState();
+// }
+
+// class _ImageWidgetState extends State<ImageWidget> {
+//   int currImage = 0;
+//   String displayImage = images[0];
+
+//   void nextImage() {
+//     setState(() {
+//       if(currImage >= 4){
+//         currImage = 0;
+//         displayImage = images[currImage];
+//       }else {
+//         currImage++;
+//         displayImage = images[currImage];
+//       }
+//     });
+//   }
+//   void prevImage() {
+//     setState(() {
+//       if(currImage <= 0){
+//         currImage = 4;
+//         displayImage = images[currImage];
+//       }else {
+//         currImage--;
+//         displayImage = images[currImage];
+//       }
+//     });
+//   }
+
+//   String imagePath = 'assets/bird.jpg';
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("Image Viewer"),
+//         backgroundColor: Colors.blue,
+//         actions: [
+//           IconButton(onPressed: prevImage, icon: Icon(Icons.navigate_before)),
+//           IconButton(onPressed: nextImage, icon: Icon(Icons.navigate_next)),
+//         ],
+//       ),
+//       body: Image(image: AssetImage(displayImage)),
+//       );
+//   }
+// }
+
 void main() {
   runApp(MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(
-        title: Text("Favorite Card"),
-        backgroundColor: Colors.blue,
-      ),
-      body: Column(
+    home: Container(
+      color: Colors.lightGreen,
+      child: Column(
         children: [
-          BestCard(title: "burger", desc: "2 bread 1 meat in the middle"),
-          BestCard(title: "sushi", desc: "meat wrapped in rice wrapped in sushi"),
-          BestCard(title: "pizza", desc: "circular bread meat cheese slice"),
+          ScoreCard(subject: "Flutter")
         ],
       ),
-    )
+    ),
   ));
 }
 
-class BestCard extends StatefulWidget {
-  final String title;
-  final String desc;
-
-  const BestCard ({super.key, required this.title, required this.desc});
-
-  @override  
-  State<BestCard> createState() => _BestCardState();
+class ScoreCard extends StatefulWidget {
+  final String subject;
+  const ScoreCard ({super.key, required this.subject});
+  @override
+  State<ScoreCard> createState() => _ScoreCardState();
 }
 
-class _BestCardState extends State<BestCard> {
-  // Color iconColor = Colors.grey;
-  Icon icon = Icon(Icons.favorite_border, color: Colors.grey,);
-  bool iconState = false;
-
-  void iconColorPress() {
+class _ScoreCardState extends State<ScoreCard> {
+  int currScore = 10;
+  int maxScore = 10;
+  void addScore() {
     setState(() {
-      if (!iconState) {
-        icon = Icon(Icons.favorite, color: Colors.red,);
-        iconState = true;
-      } else {
-        icon = Icon(Icons.favorite_border, color: Colors.grey,);
-        iconState = false;
+      if(currScore < maxScore){
+        currScore++;
+      }
+    });
+  }
+
+  void subScore() {
+    setState(() {
+      if(currScore > 0){
+        currScore--;
       }
     });
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Container(
+      // width: 200,
+      // height: 100,
       padding: EdgeInsets.all(10),
-      // margin: EdgeInsets.all(10),
-      height: 100,
+      margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: BorderDirectional(
-          bottom: BorderSide(
-            color: Colors.black, // Color of the border
-            width: 1, // Width of the border
-            style: BorderStyle.solid,
-          ),
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      child: Row(
+      child: Column(
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+          Text("My score in ${widget.subject}"),
+          Row(
+            children: [
+              IconButton(onPressed: subScore, icon: Icon(Icons.remove)),
+              IconButton(onPressed: addScore, icon: Icon(Icons.add)),
+            ],
+          ),
+          Container(
+            clipBehavior: Clip.antiAlias,
+            // padding: EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black, width: 1, style: BorderStyle.solid),
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+            ),
+            child: Row(
               children: [
-                Text(widget.title, style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
-                SizedBox(height: 10,),
-                Text(widget.desc, style: TextStyle(color: Colors.black)),
+                Expanded(flex: currScore, child: Container(height: 50, color: Colors.green,)),
+                Expanded(flex: maxScore - currScore, child: Container(height: 50, color: Colors.transparent,)),
               ],
             ),
-          ),
-          IconButton(
-            onPressed: iconColorPress,
-            icon: icon,
-          ),
+          )
         ],
       ),
     );
   }
 }
+
