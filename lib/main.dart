@@ -212,13 +212,28 @@ import 'package:flutter/material.dart';
 //   }
 // }
 
+List<Color> scoreColors = [
+  Colors.transparent,
+  Colors.green.shade50,
+  Colors.green.shade100,
+  Colors.green.shade200,
+  Colors.green.shade300,
+  Colors.green.shade400,
+  Colors.green.shade500,
+  Colors.green.shade600,
+  Colors.green.shade700,
+  Colors.green.shade800,
+  Colors.green.shade900,
+];
+
 void main() {
   runApp(MaterialApp(
     home: Container(
       color: Colors.lightGreen,
       child: Column(
         children: [
-          ScoreCard(subject: "Flutter")
+          ScoreCard(subject: "Flutter"),
+          ScoreCard(subject: "Dart"),
         ],
       ),
     ),
@@ -233,7 +248,7 @@ class ScoreCard extends StatefulWidget {
 }
 
 class _ScoreCardState extends State<ScoreCard> {
-  int currScore = 10;
+  int currScore = 0;
   int maxScore = 10;
   void addScore() {
     setState(() {
@@ -256,31 +271,35 @@ class _ScoreCardState extends State<ScoreCard> {
     return Container(
       // width: 200,
       // height: 100,
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(25),
+      margin: EdgeInsets.all(25),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(25)),
       ),
       child: Column(
         children: [
-          Text("My score in ${widget.subject}"),
+          Text("My score in ${widget.subject}", style: TextStyle(decoration: TextDecoration.none, color: Colors.grey),),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(onPressed: subScore, icon: Icon(Icons.remove)),
-              IconButton(onPressed: addScore, icon: Icon(Icons.add)),
+              IconButton(onPressed: subScore, icon: Icon(Icons.remove, size: 50,)),
+              IconButton(onPressed: addScore, icon: Icon(Icons.add, size: 50,)),
             ],
           ),
           Container(
-            clipBehavior: Clip.antiAlias,
-            // padding: EdgeInsets.all(3),
+            margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black, width: 1, style: BorderStyle.solid),
               borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
             child: Row(
               children: [
-                Expanded(flex: currScore, child: Container(height: 50, color: Colors.green,)),
+                Expanded(flex: currScore, child: Container(height: 50,
+                decoration: BoxDecoration(
+                  color: scoreColors[currScore],
+                  borderRadius: BorderRadius.all(Radius.circular(13.75))
+                ),)),
                 Expanded(flex: maxScore - currScore, child: Container(height: 50, color: Colors.transparent,)),
               ],
             ),
@@ -290,4 +309,3 @@ class _ScoreCardState extends State<ScoreCard> {
     );
   }
 }
-
