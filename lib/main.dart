@@ -212,98 +212,187 @@ import 'package:flutter/material.dart';
 //   }
 // }
 
-List<Color> scoreColors = [
-  Colors.transparent,
-  Colors.green.shade50,
-  Colors.green.shade100,
-  Colors.green.shade200,
-  Colors.green.shade300,
-  Colors.green.shade400,
-  Colors.green.shade500,
-  Colors.green.shade600,
-  Colors.green.shade700,
-  Colors.green.shade800,
-  Colors.green.shade900,
-];
+// List<Color> scoreColors = [
+//   Colors.transparent,
+//   Colors.green.shade50,
+//   Colors.green.shade100,
+//   Colors.green.shade200,
+//   Colors.green.shade300,
+//   Colors.green.shade400,
+//   Colors.green.shade500,
+//   Colors.green.shade600,
+//   Colors.green.shade700,
+//   Colors.green.shade800,
+//   Colors.green.shade900,
+// ];
+
+// void main() {
+//   runApp(MaterialApp(
+//     home: Container(
+//       color: Colors.lightGreen,
+//       child: Column(
+//         children: [
+//           ScoreCard(subject: "Flutter"),
+//           ScoreCard(subject: "Dart"),
+//         ],
+//       ),
+//     ),
+//   ));
+// }
+
+// class ScoreCard extends StatefulWidget {
+//   final String subject;
+//   const ScoreCard ({super.key, required this.subject});
+//   @override
+//   State<ScoreCard> createState() => _ScoreCardState();
+// }
+
+// class _ScoreCardState extends State<ScoreCard> {
+//   int currScore = 0;
+//   int maxScore = 10;
+//   void addScore() {
+//     setState(() {
+//       if(currScore < maxScore){
+//         currScore++;
+//       }
+//     });
+//   }
+
+//   void subScore() {
+//     setState(() {
+//       if(currScore > 0){
+//         currScore--;
+//       }
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context){
+//     return Container(
+//       // width: 200,
+//       // height: 100,
+//       padding: EdgeInsets.all(25),
+//       margin: EdgeInsets.all(25),
+//       decoration: BoxDecoration(
+//         color: Colors.white,
+//         borderRadius: BorderRadius.all(Radius.circular(25)),
+//       ),
+//       child: Column(
+//         children: [
+//           Text("My score in ${widget.subject}", style: TextStyle(decoration: TextDecoration.none, color: Colors.grey),),
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//             children: [
+//               IconButton(onPressed: subScore, icon: Icon(Icons.remove, size: 50,)),
+//               IconButton(onPressed: addScore, icon: Icon(Icons.add, size: 50,)),
+//             ],
+//           ),
+//           Container(
+//             margin: EdgeInsets.all(10),
+//             decoration: BoxDecoration(
+//               border: Border.all(color: Colors.black, width: 1, style: BorderStyle.solid),
+//               borderRadius: BorderRadius.all(Radius.circular(15)),
+//             ),
+//             child: Row(
+//               children: [
+//                 Expanded(flex: currScore, child: Container(height: 50,
+//                 decoration: BoxDecoration(
+//                   color: scoreColors[currScore],
+//                   borderRadius: BorderRadius.all(Radius.circular(13.75))
+//                 ),)),
+//                 Expanded(flex: maxScore - currScore, child: Container(height: 50, color: Colors.transparent,)),
+//               ],
+//             ),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 void main() {
   runApp(MaterialApp(
     home: Container(
-      color: Colors.lightGreen,
-      child: Column(
-        children: [
-          ScoreCard(subject: "Flutter"),
-          ScoreCard(subject: "Dart"),
-        ],
-      ),
-    ),
-  ));
-}
-
-class ScoreCard extends StatefulWidget {
-  final String subject;
-  const ScoreCard ({super.key, required this.subject});
-  @override
-  State<ScoreCard> createState() => _ScoreCardState();
-}
-
-class _ScoreCardState extends State<ScoreCard> {
-  int currScore = 0;
-  int maxScore = 10;
-  void addScore() {
-    setState(() {
-      if(currScore < maxScore){
-        currScore++;
-      }
-    });
-  }
-
-  void subScore() {
-    setState(() {
-      if(currScore > 0){
-        currScore--;
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context){
-    return Container(
-      // width: 200,
-      // height: 100,
-      padding: EdgeInsets.all(25),
-      margin: EdgeInsets.all(25),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(25)),
+        border: Border.all(width: 5, color: Colors.grey, style: BorderStyle.solid),
+        borderRadius: BorderRadius.all(Radius.circular(25))
       ),
       child: Column(
         children: [
-          Text("My score in ${widget.subject}", style: TextStyle(decoration: TextDecoration.none, color: Colors.grey),),
+          Center(child: Text("Seasons", style: TextStyle(decoration: TextDecoration.none, color: Colors.black),),),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(onPressed: subScore, icon: Icon(Icons.remove, size: 50,)),
-              IconButton(onPressed: addScore, icon: Icon(Icons.add, size: 50,)),
+              WeatherCard(countryName: "Cambodia", startSeason: Seasons.summer,),
+              WeatherCard(countryName: "France", startSeason: Seasons.winter,),
             ],
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black, width: 1, style: BorderStyle.solid),
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-            ),
-            child: Row(
-              children: [
-                Expanded(flex: currScore, child: Container(height: 50,
-                decoration: BoxDecoration(
-                  color: scoreColors[currScore],
-                  borderRadius: BorderRadius.all(Radius.circular(13.75))
-                ),)),
-                Expanded(flex: maxScore - currScore, child: Container(height: 50, color: Colors.transparent,)),
-              ],
-            ),
           )
+        ],
+      )
+    )
+    )
+  );
+}
+
+enum Seasons {
+  winter(seasonImage: 'assets/winter.png'),
+  spring(seasonImage: 'assets/spring.png'),
+  summer(seasonImage: 'assets/summer.png'),
+  fall(seasonImage: 'assets/fall.png');
+
+  final String seasonImage;
+
+  const Seasons({required this.seasonImage});
+}
+
+
+class WeatherCard extends StatefulWidget {
+  final String countryName;
+  final Seasons startSeason;
+  const WeatherCard ({super.key, required this.countryName, required this.startSeason});
+  @override
+  State<WeatherCard> createState() => _WeatherCardState();
+}
+
+class _WeatherCardState extends State<WeatherCard> {
+  late Seasons currSeason = widget.startSeason;
+
+  void changeSeason() {
+    setState(() {
+      switch(currSeason) {
+        case Seasons.winter :
+        currSeason = Seasons.spring;
+        break;
+        case Seasons.spring :
+        currSeason = Seasons.summer;
+        break;
+        case Seasons.summer :
+        currSeason = Seasons.fall;
+        break;
+        case Seasons.fall :
+        currSeason = Seasons.winter;
+        break;
+      }
+    });
+  }
+
+  @override  
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      height: 300,
+      decoration: BoxDecoration(
+        border: Border.all(width: 1, color: Colors.grey, style: BorderStyle.solid),
+      ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 250,
+            width: 100,
+            child: Image(image: AssetImage(currSeason.seasonImage),fit: BoxFit.cover,),
+          ),
+          Expanded(child: TextButton(onPressed: changeSeason, child: Text(widget.countryName, style: TextStyle(color: Colors.black),),)),
+          
         ],
       ),
     );
